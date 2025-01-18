@@ -8,7 +8,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
-    <title>Home | Willmar Whisky Society</title>
+    <title>History | Willmar Whisky Society</title>
     <!-- <link rel="icon" href="../static/imgs/favicon.png" type="image/png"> -->
 
 </head>
@@ -34,8 +34,10 @@
         </div>
     </div>
     <!-- end header !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+
     <nav class="navbar navbar-expand-lg bg-body-tertiary ">
         <div class="container">
+
                 <!-- creates the burger menu icon -->
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -65,29 +67,75 @@
 
     <!-- page content -->
     <div class="scroll_gap">
-        <h1 class="text-center py-5">
-            History
-        </h1>
-        <div class="page_container mx-auto">
-            <div class="col-6">
-                <div class="w-80">
-                    <h2>Our Story</h2>
-                    <p>The Willmar Whisky Society, established in 2019 and recognized as a 501(c)(3) organization, is a community 
-                        of whisky enthusiasts. Centered around a shared passion for whisky, our primary focus is fostering a sense 
-                        of camaraderie and building a community based on this common interest. Additionally, we are committed to 
-                        making a positive impact in our community through philanthropic initiatives.</p>
-                        <p>We warmly invite you to join us at one of our upcoming monthly samplings, where you can share your love for 
-                            whisky with fellow enthusiasts and be part of our mission to make a meaningful difference in our community.</p>
+        <div class="heading text-center py-5 w-50 mx-auto">
+            <h1 class="">
+                History
+            </h1>
+            <p>Journey through our whisky tasting club's history to witness the diverse array of sampled whiskies, showcasing an expanded 
+                variety that reflects our commitment to exploring different regions, flavors, and distilleries. Each displayed image is a 
+                testament to the unique and broad spectrum of tastes and aromas that have delighted our members throughout our club's rich 
+                and storied history.</p>
+        </div>
+
+        <!-- History List -->
+        <div class="container mx-auto">
+            <div class="row">
+                {% for event in events %}
+                <div class="col-12 mb-5">
+                    <div class="row">
+
+                        <!-- For Small screens (Mobile) -->
+                        <div class="d-block d-md-none">
+                            <!-- Image on top, text below -->
+                            <div class="col-12">
+                                <img class="img-fluid" src="../static/imgs/event_imgs/{{event.pic_location}}" alt="{{event.pic_location}}">
+                            </div>
+                            <div class="col-12 text-center">
+                                <h2>{{event.title}} - #{{event.id}}</h2>
+                                <p>{{event.about_2}}</p>
+                            </div>
+                        </div>
+
+                        <!-- For Large screens (Desktop/Tablets) -->
+                        <div class="d-none d-md-block">
+                            <div class="row">
+
+                                <!-- Even index: Image on the right -->
+                                {% if loop.index % 2 == 0 %} 
+                                <div class="col-md-8 my-auto">
+                                    <div class="text-center">
+                                        <h2>{{event.title}} - #{{event.id}}</h2>
+                                        <p>{{event.about_2}}</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <img class="img-fluid" src="../static/imgs/event_imgs/{{event.pic_location}}" alt="{{event.pic_location}}">
+                                </div>
+
+                                <!-- Odd index: Image on the left -->
+                                {% else %} 
+                                <div class="col-md-4">
+                                    <img class="img-fluid" src="../static/imgs/event_imgs/{{event.pic_location}}" alt="{{event.pic_location}}">
+                                </div>
+                                <div class="col-md-8 my-auto">
+                                    <div class="text-center">
+                                        <h2>{{event.title}} - #{{event.id}}</h2>
+                                        <p>{{event.about_2}}</p>
+                                    </div>
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="col">
-                <img class="wws_img" src="../static/imgs/img_1" alt="img_1">
+                {% endfor %}
             </div>
         </div>
+
     </div>
 
     <!-- footer -->
-    <footer class="pt-5">
+    <footer class="pt-2 scroll_gap">
         <div class="text-center">
             <p><a href="mailto:info@mysite.com">info@mysite.com</a></p>
             <p>&copy; 2023 by Willmar Whisky Society</p>

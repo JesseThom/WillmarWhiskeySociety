@@ -8,3 +8,11 @@ document.addEventListener("scroll", function () {
     }
 });
 
+function confirmDelete(eventId,eventTitle) {
+    // Show a confirmation dialog
+    var result = confirm("Are you sure you want to delete " + eventTitle + "?");
+    if (result) {
+        // Redirect to the delete route if confirmed
+        window.location.href = "/delete_event/" + eventId;
+    }
+}

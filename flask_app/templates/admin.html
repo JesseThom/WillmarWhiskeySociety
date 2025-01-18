@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>Admin | Willmar Whisky Society</title>
+    <!-- <link rel="icon" href="../static/imgs/favicon.png" type="image/png"> -->
+
+</head>
+
+<body>
+
+    <!-- WWS logo header w/social-->
+    <div class="header">
+        <div class="header_container">
+            <div class="social_container">
+                <div class="social">
+                    <!-- put socials here -->
+                </div>
+            </div>
+            <div class="logo_container">
+                <a href="#">
+                    <img class="logo d-block mx-auto pt-3" src="\static\imgs\WillmarWhiskySociety_BLACK-Transparent.jpg"
+                        class="img-responsive" alt="WWS logo">
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- end header !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+    <nav class="navbar navbar-expand-lg bg-body-tertiary ">
+        <div class="container">
+            <!-- creates the burger menu icon -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse row text-center" id="navbarSupportedContent">
+                <ul class="navbar_nav ">
+                    <li class="col">
+                        <a class="nav_link underlineAnimate" href="/logout">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        </div>
+    </nav>
+
+
+    <div class="whitebox col-sm-10 col-lg-8 mx-auto p-3">
+        {% for message in get_flashed_messages(category_filter=['err_created']) %}
+        <p class="err-msg text-center">{{message}}</p>
+        {% endfor %}
+        
+        <a href="/add_event">Add Event</a>
+
+        <h2 class="text-center">Event List</h2>
+        <table class="table table-dark table-striped table-hover">
+            <thead>
+                <th>Event #</th>
+                <th>Title</th>
+                <th>History</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </thead>
+            <tbody>
+                {% for event in events %}
+                <tr>
+                    <td>{{event.id}}</td>
+                    <td>{{event.title}}</td>
+                    {% if event.history == 1 %}
+                        <td class="text-success">Yes</td>
+                    {%else%}
+                        <td class="text-danger">No</td>
+                    {%endif%}
+                    <td><a class="btn btn-secondary" href="/edit_event/{{event.id}}">Edit</a></td>
+                    <!-- <td><a class="btn btn-danger" href="/delete_event/{{event.id}}">Delete</a></td> -->
+                    <td><a class="btn btn-danger" href="#" onclick="confirmDelete('{{event.id}}','{{event.title}}')">Delete</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+
+        </table>
+    </div>
+
+    <script src="/static/js/script.js"></script>
+</body>
+
+</html>
