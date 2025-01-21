@@ -1,8 +1,6 @@
 from flask_app.config.mysqlconnection import connectToMySQL
 from flask import flash
 from flask_app import DATABASE, bcrypt
-# insert next line into __init_.py   
-# DATABASE = "users_schema"#TODO change schema name
 
 class User:
     def __init__(self,data:dict):

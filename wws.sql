@@ -42,6 +42,6 @@ CREATE TABLE `users` (
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
-/*!password is whiskey*/;
-insert into users (name, password) values ("admin","$2b$12$xPuVSJR/PWSoc83WuB3lkeX6n4kF2U6qkDry.jGdHtO.x2NXGUhHi");
+-- password is whiskey
+insert into users (id, name, password) values (1, "admin","$2b$12$xPuVSJR/PWSoc83WuB3lkeX6n4kF2U6qkDry.jGdHtO.x2NXGUhHi");
 -- Dump completed on 2025-01-17 18:40:15

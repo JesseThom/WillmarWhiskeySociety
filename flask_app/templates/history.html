@@ -101,23 +101,23 @@
                             <div class="row">
 
                                 <!-- Even index: Image on the right -->
-                                {% if loop.index % 2 == 0 %} 
-                                <div class="col-md-8 my-auto">
+                                {% if loop.index % 2 == 1 %} 
+                                <div class="col-md-6 my-auto">
                                     <div class="text-center">
                                         <h2>{{event.title}} - #{{event.id}}</h2>
                                         <p>{{event.about_2}}</p>
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-6 d-flex justify-content-center">
                                     <img class="img-fluid" src="../static/imgs/event_imgs/{{event.pic_location}}" alt="{{event.pic_location}}">
                                 </div>
 
                                 <!-- Odd index: Image on the left -->
                                 {% else %} 
-                                <div class="col-md-4">
+                                <div class="col-md-6 d-flex justify-content-center">
                                     <img class="img-fluid" src="../static/imgs/event_imgs/{{event.pic_location}}" alt="{{event.pic_location}}">
                                 </div>
-                                <div class="col-md-8 my-auto">
+                                <div class="col-md-6 my-auto">
                                     <div class="text-center">
                                         <h2>{{event.title}} - #{{event.id}}</h2>
                                         <p>{{event.about_2}}</p>

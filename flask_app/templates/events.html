@@ -100,22 +100,22 @@
                         <!-- For Large screens (Desktop/Tablets) -->
                         <div class="d-none d-md-block">
                             <div class="row">
-                                {% if loop.index % 2 == 0 %} <!-- Even index: Image on the right -->
-                                <div class="col-md-8 my-auto">
+                                {% if loop.index % 2 == 1 %} <!-- Even index: Image on the right -->
+                                <div class="col-md-6 my-auto">
                                     <div class="text-center">
                                         <p>{{event.date.strftime('%a, %b %d')}} | {{event.location}}</p>
                                         <h2>{{event.title}} - #{{event.id}}</h2>
                                         <a class="btn btn-secondary mt-2" href="/details/{{event.id}}">Details</a>
                                     </div>
                                 </div>
-                                <div class="col-md-4">
-                                    <img class="img-fluid" src="/static/imgs/event_imgs/{{event.pic_location}}" alt="{{event.pic_location}}">
+                                <div class="col-md-6 d-flex justify-content-center">
+                                    <img class="img-fluid " src="/static/imgs/event_imgs/{{event.pic_location}}" alt="{{event.pic_location}}">
                                 </div>
                                 {% else %} <!-- Odd index: Image on the left -->
-                                <div class="col-md-4">
+                                <div class="col-md-6 d-flex justify-content-center">
                                     <img class="img-fluid" src="/static/imgs/event_imgs/{{event.pic_location}}" alt="{{event.pic_location}}">
                                 </div>
-                                <div class="col-md-8 my-auto">
+                                <div class="col-md-6 my-auto">
                                     <div class="text-center">
                                         <p>{{event.date.strftime('%a, %b %d')}} | {{event.location}}</p>
                                         <h2>{{event.title}} - #{{event.id}}</h2>

@@ -16,6 +16,19 @@ from flask_app.models.model_events import Event
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
+def delete_img(img):
+    file_path = os.path.join(UPLOAD_FOLDER, img)
+    if os.path.exists(file_path):
+        os.remove(file_path)
+        return print("Error Image NOT Deleted")
+    return print("Image deleted")
+
+def save_img(file):
+    file_path = os.path.join(UPLOAD_FOLDER,file.filename)
+    rgb_image = Image.open(file).convert('RGB')
+    rgb_image.save(file_path)
+    return print("Image Saved")
+
 #landing page
 @app.route('/')
 def landing_page():
@@ -96,9 +109,7 @@ def create_event():
     file = request.files['pic_location']
 
     if file and allowed_file(file.filename):
-        file_path = os.path.join(UPLOAD_FOLDER,file.filename)
-        rgb_image = Image.open(file).convert('RGB')
-        rgb_image.save(file_path)
+        save_img(file)
 
         data ={
             **request.form,
@@ -134,17 +145,12 @@ def update_event():
 
     if file and allowed_file(file.filename):
         # save new img
-        file_path = os.path.join(UPLOAD_FOLDER,file.filename)
-        rgb_image = Image.open(file).convert('RGB')
-        rgb_image.save(file_path)
+        save_img(file)
 
         # remove old img
         image_filename = request.form['pic_location']
         if image_filename:
-            file_path = os.path.join(UPLOAD_FOLDER, image_filename)
-            if os.path.exists(file_path):
-                os.remove(file_path)
-                print("file deleted")
+            delete_img(image_filename)
 
         data ={
             **request.form,
@@ -172,10 +178,7 @@ def delete_event(id):
     if event:
         image_filename = event.pic_location
         if image_filename:
-            file_path = os.path.join(UPLOAD_FOLDER, image_filename)
-            if os.path.exists(file_path):
-                os.remove(file_path)
-                print("file deleted")
+            delete_img(image_filename)
 
     Event.delete_one({'id':id})
     return redirect("/admin")
